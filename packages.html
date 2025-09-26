@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Luxe Glow — Packages</title>
+<style>
+  body{margin:0;font-family:Inter,system-ui;background:#FAF8FF;color:#111;}
+  .wrap{max-width:800px;margin:auto;padding:20px}
+  h1{color:#6C4BE5;text-align:center}
+  .package{background:white;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,0.08);padding:20px;margin:20px 0}
+  .price{color:#FF8A5B;font-weight:700;margin-top:8px}
+  a.back{display:inline-block;margin-top:24px;color:#6C4BE5;text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Popular Packages</h1>
+  <div id="pkgList"></div>
+  <div style="text-align:center"><a href="index.html" class="back">← Back to Home</a></div>
+</div>
+
+<script>
+const PACKAGES = [
+  {title:'Relax & Restore',desc:'Facial + 60min massage + tea',price:'₦120,000'},
+  {title:'Bridal Elegance',desc:'Full bridal package with trials',price:'₦450,000'},
+  {title:'Express Glow',desc:'30min facial and express mani',price:'₦45,000'}
+];
+const list=document.getElementById('pkgList');
+PACKAGES.forEach(p=>{
+  list.innerHTML += `
+    <div class="package">
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <div class="price">${p.price}</div>
+    </div>`;
+});
+</script>
+</body>
+</html>

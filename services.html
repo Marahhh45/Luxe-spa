@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Luxe Glow — Services</title>
+<style>
+  body{margin:0;font-family:Inter,system-ui;background:#FAF8FF;color:#111;}
+  .wrap{max-width:1000px;margin:auto;padding:20px}
+  h1{color:#6C4BE5;text-align:center}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:30px}
+  .card{background:white;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,0.08);padding:16px;text-align:center}
+  .card img{width:100%;height:160px;object-fit:cover;border-radius:12px}
+  .price{color:#6C4BE5;font-weight:700;margin-top:8px}
+  a.back{display:inline-block;margin-top:24px;color:#6C4BE5;text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Our Services</h1>
+  <div class="grid" id="serviceGrid"></div>
+  <div style="text-align:center"><a href="index.html" class="back">← Back to Home</a></div>
+</div>
+
+<script>
+const SERVICES = [
+  {title:'Signature Facial',price:65000,img:'https://i.pinimg.com/1200x/d6/11/fd/d611fd94e37c71e407c1075f972e1ac0.jpg'},
+  {title:'Aromatherapy Massage',price:75000,img:'https://i.pinimg.com/736x/b1/ef/17/b1ef173208949e254df215ae826f3b84.jpg'},
+  {title:'Manicure & Pedicure',price:25000,img:'https://i.pinimg.com/1200x/45/c9/58/45c958c54bca1000a1cbabf886090f57.jpg'},
+  {title:'Bridal Package',price:350000,img:'https://i.pinimg.com/736x/6e/01/6d/6e016d00dbe1fcc91b5767260ab04c3e.jpg'}
+];
+const grid=document.getElementById('serviceGrid');
+SERVICES.forEach(s=>{
+  grid.innerHTML += `
+    <div class="card">
+      <img src="${s.img}" alt="${s.title}">
+      <h3>${s.title}</h3>
+      <div class="price">₦${s.price.toLocaleString()}</div>
+    </div>`;
+});
+</script>
+</body>
+</html>
