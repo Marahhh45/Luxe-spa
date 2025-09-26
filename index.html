@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Luxe Glow — Beauty & Spa Booking</title>
+<style>
+  /* ---------------- Theme ---------------- */
+  :root{
+    --bg: #FAF8FF;
+    --card: #ffffff;
+    --muted: #6b6b7a;
+    --primary: #6C4BE5;    /* violet */
+    --accent: #FF8A5B;     /* coral */
+    --glass: rgba(108,75,229,0.08);
+    --radius: 14px;
+    --shadow: 0 10px 30px rgba(31,41,55,0.08);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:linear-gradient(180deg,#FBFBFF,var(--bg));
+    color:#111827;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap{max-width:1200px;margin:32px auto;padding:20px;display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+  @media(max-width:980px){.wrap{grid-template-columns:1fr;padding:14px} .aside{order:2}}
+  header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:64px;height:64px;border-radius:12px;display:grid;place-items:center;color:white;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:var(--shadow);font-size:1.1rem}
+  .title{font-size:1.25rem;font-weight:800}
+  .tagline{color:var(--muted);font-size:0.94rem}
+
+  /* ---------- Main content ---------- */
+  .main{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+  .hero{display:flex;gap:18px;align-items:center}
+  .hero-left{flex:1}
+  .hero h1{margin:0;font-size:1.6rem}
+  .hero p{margin:8px 0;color:var(--muted)}
+  .cta-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .btn{background:var(--primary);color:white;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(108,75,229,0.12)}
+  .btn.secondary{background:transparent;color:var(--primary);border:1px solid rgba(108,75,229,0.12);box-shadow:none}
+
+  .hero-right{width:320px;border-radius:12px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,0.06)}
+  .hero-right img{width:100%;height:220px;object-fit:cover;display:block}
+
+  /* ---------- Services ---------- */
+  .section{margin-top:18px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .service{
+    background:linear-gradient(180deg,#fff,var(--card));
+    border-radius:12px;padding:12px;box-shadow:0 8px 20px rgba(15,23,42,0.04);
+    display:flex;gap:12px;align-items:center;border:1px solid rgba(15,23,42,0.03);
+  }
+  .svc-thumb{width:72px;height:72px;border-radius:10px;overflow:hidden;flex-shrink:0}
+  .svc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .svc-meta h4{margin:0;font-size:1rem}
+  .svc-meta p{margin:6px 0 0;color:var(--muted);font-size:0.9rem}
+  .price{font-weight:800;color:#111;margin-top:8px}
+
+  /* ---------- Packages carousel-lite (grid) ---------- */
+  .packages{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;margin-top:10px}
+  .pkg{min-width:220px;background:var(--card);border-radius:12px;padding:12px;flex-shrink:0;box-shadow:var(--shadow);border:1px solid rgba(15,23,42,0.03)}
+  .pkg h4{margin:0}
+  .pkg p{color:var(--muted);font-size:0.9rem;margin:8px 0}
+  .pkg .price{font-weight:800}
+
+  /* ---------- Aside (booking quick card + contacts) ---------- */
+  .aside{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);position:sticky;top:20px;height:fit-content}
+  .aside h3{margin:0 0 8px 0}
+  .quick .row{display:flex;gap:8px;align-items:center;margin:8px 0}
+  .quick input,.quick select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)}
+  .quick .half{width:49%}
+  .muted{color:var(--muted);font-size:0.9rem}
+
+  /* ---------- Modal ---------- */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:1200}
+  .modal{width:100%;max-width:520px;background:var(--card);border-radius:12px;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,0.2)}
+  .modal h3{margin:0 0 12px}
+  .form-row{display:flex;gap:10px;flex-wrap:wrap}
+  .form-row input,.form-row select,textarea{padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);width:100%}
+  .time-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .slot{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);cursor:pointer;background:transparent}
+  .slot.active{background:var(--primary);color:white;border-color:transparent;box-shadow:0 8px 20px rgba(108,75,229,0.12)}
+  
+  /* ---------- Toast ---------- */
+  .toast{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,var(--primary),var(--accent));color:white;padding:12px 16px;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,0.18);transform:translateY(20px);opacity:0;pointer-events:none;transition:all .28s ease}
+  .toast.show{transform:none;opacity:1;pointer-events:auto}
+
+  /* ---------- Footer ---------- */
+  footer{grid-column:1/-1;text-align:center;color:var(--muted);margin-top:18px;padding:10px}
+
+  /* small helpers */
+  .center{display:grid;place-items:center}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="wrap" role="application" aria-labelledby="siteTitle">
+  <header id="siteTitle">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">LG</div>
+      <div>
+        <div class="title">Luxe Glow</div>
+        <div class="tagline">Premium beauty & spa — crafted experiences</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn" id="bookNowBtn">Book Now</button>
+      <button class="btn secondary" id="contactBtn">Contact</button>
+    </div>
+  </header>
+
+  <!-- main column -->
+  <main class="main" aria-live="polite">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Relax. Renew. Radiate.</h1>
+        <p>At Luxe Glow we blend luxury, wellness and expert care — from signature facials to full bridal packages. Explore services and reserve your experience in seconds.</p>
+        <div class="cta-row">
+          <button class="btn" id="exploreServices">Explore Services</button>
+          <button class="btn secondary" id="viewPackages">View Packages</button>
+        </div>
+        <div class="section" style="margin-top:18px">
+          <h2 style="font-size:1.05rem;margin-bottom:8px">Our Services</h2>
+          <div class="grid" id="servicesList">
+            <!-- services injected -->
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 style="font-size:1.05rem;margin-bottom:8px">Popular Packages</h2>
+          <div class="packages" id="packagesList" aria-label="packages">
+            <!-- packages injected -->
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-hidden="true">
+        <img src="download (3).jpeg" alt="Luxe spa treatment">
+      </aside>
+    </section>
+  </main>
+
+  <!-- aside column -->
+  <aside class="aside" aria-label="Quick booking">
+    <h3>Quick Book</h3>
+    <div class="muted">Choose a service, pick date & time — we’ll confirm via WhatsApp.</div>
+
+    <div class="quick" style="margin-top:12px">
+      <label class="muted" for="quickService">Service</label>
+      <select id="quickService" aria-label="Quick service">
+        <!-- options injected -->
+      </select>
+
+      <div class="row" style="display:flex;gap:8px;margin-top:8px">
+        <input id="quickName" placeholder="Your name" />
+      </div>
+
+      <div class="row" style="display:flex;gap:8px;margin-top:8px">
+        <input id="quickPhone" placeholder="Phone (e.g. 2348...)" />
+      </div>
+
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn" id="quickBookBtn" style="flex:1">Reserve</button>
+        <button class="btn secondary" id="quickContact" style="width:50px">📞</button>
+      </div>
+
+      <div style="margin-top:12px;color:var(--muted);font-size:0.9rem">We will message you to confirm availability & details.</div>
+    </div>
+  </aside>
+</div>
+
+<footer>© <strong>Luxe Glow</strong> — crafted experiences · <span class="muted">Designed for presentation</span></footer>
+
+<!-- Modal: Booking -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" role="document">
+    <h3 id="modalTitle">Book Service</h3>
+    <p id="modalSub" class="muted">Choose a date and available time slot</p>
+
+    <div style="margin-top:12px" class="form-row">
+      <select id="svcSelect" aria-label="Service select"></select>
+    </div>
+
+    <div style="margin-top:12px" class="form-row">
+      <input id="custName" placeholder="Full name" />
+    </div>
+
+    <div style="margin-top:12px" class="form-row">
+      <input id="custPhone" placeholder="Phone (e.g. 2348123456789)" />
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="muted">Choose date</label>
+      <input id="datePicker" type="date" min="" />
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="muted">Available times</label>
+      <div class="time-grid" id="timeGrid" role="list">
+        <!-- slots injected -->
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+      <button class="close-btn" id="modalCancel">Cancel</button>
+      <button class="confirm-btn" id="modalConfirm">Confirm & Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">Saved</div>
+
+<script>
+/* ---------- Data (demo) ---------- */
+const SERVICES = [
+  { id:'facial', title:'Signature Facial', short:'Deep cleanse, glow boost', price:65000, img:'https://i.pinimg.com/1200x/d6/11/fd/d611fd94e37c71e407c1075f972e1ac0.jpg' },
+  { id:'massage', title:'Aromatherapy Massage', short:'Relaxing full-body massage', price:75000, img:'https://i.pinimg.com/736x/b1/ef/17/b1ef173208949e254df215ae826f3b84.jpg' },
+  { id:'manicure', title:'Manicure & Pedicure', short:'Luxury mani-pedi with polish', price:25000, img:'https://i.pinimg.com/1200x/45/c9/58/45c958c54bca1000a1cbabf886090f57.jpg' },
+  { id:'bridal', title:'Bridal Package', short:'Hair, makeup & day-of coordination', price:350000, img:'https://i.pinimg.com/736x/6e/01/6d/6e016d00dbe1fcc91b5767260ab04c3e.jpg' }
+];
+
+const PACKAGES = [
+  { id:'relax', title:'Relax & Restore', desc:'Facial + 60min massage + tea', price:'₦120,000' },
+  { id:'bride', title:'Bridal Elegance', desc:'Full bridal package with trials', price:'₦450,000' },
+  { id:'express', title:'Express Glow', desc:'30min facial and express mani', price:'₦45,000' }
+];
+
+/* ---------- Helpers ---------- */
+const el = id => document.getElementById(id);
+const toast = (msg='Saved')=>{
+  const t = el('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'),2400);
+};
+const formatN = n => '₦' + Number(n).toLocaleString();
+
+/* ---------- Render UI ---------- */
+function renderServices(){
+  const list = el('servicesList');
+  const quick = el('quickService');
+  list.innerHTML=''; quick.innerHTML='';
+  SERVICES.forEach(s=>{
+    // grid service card
+    const node = document.createElement('div'); node.className='service';
+    node.innerHTML=`
+      <div class="svc-thumb"><img src="${s.img}" alt="${s.title}"></div>
+      <div class="svc-meta">
+        <h4>${s.title}</h4>
+        <p>${s.short}</p>
+        <div class="price">${formatN(s.price)}</div>
+      </div>
+    `;
+    node.querySelector('.svc-thumb').addEventListener('click', ()=> openBookingModal(s.id));
+    node.querySelector('.svc-meta h4').addEventListener('click', ()=> openBookingModal(s.id));
+    const bookBtn = document.createElement('button'); bookBtn.textContent='Book'; bookBtn.className='btn'; bookBtn.style.marginLeft='12px';
+    bookBtn.onclick = ()=> openBookingModal(s.id);
+    node.querySelector('.svc-meta').appendChild(bookBtn);
+    list.appendChild(node);
+
+    // quick option
+    const opt = document.createElement('option'); opt.value = s.id; opt.textContent = `${s.title} — ${formatN(s.price)}`;
+    quick.appendChild(opt);
+  });
+}
+function renderPackages(){
+  const wrap = el('packagesList');
+  wrap.innerHTML='';
+  PACKAGES.forEach(p=>{
+    const d = document.createElement('div'); d.className='pkg';
+    d.innerHTML = `<h4>${p.title}</h4><p>${p.desc}</p><div class="price">${p.price}</div>`;
+    wrap.appendChild(d);
+  });
+}
+
+/* ---------- Booking Modal Logic ---------- */
+const modalBackdrop = el('modalBackdrop');
+const svcSelect = el('svcSelect');
+const timeGrid = el('timeGrid');
+let chosenSlot = null;
+
+function openBookingModal(serviceId){
+  // populate services in select
+  svcSelect.innerHTML = '';
+  SERVICES.forEach(s => {
+    const o = document.createElement('option'); o.value = s.id; o.textContent = `${s.title} — ${formatN(s.price)}`;
+    svcSelect.appendChild(o);
+  });
+  // select provided
+  if(serviceId) svcSelect.value = serviceId;
+  // reset fields
+  el('custName').value = '';
+  el('custPhone').value = '';
+  el('datePicker').value = '';
+  timeGrid.innerHTML = '';
+  chosenSlot = null;
+  modalBackdrop.style.display = 'flex';
+  modalBackdrop.setAttribute('aria-hidden','false');
+  // ensure date min = today
+  const today = new Date().toISOString().slice(0,10);
+  el('datePicker').setAttribute('min', today);
+  el('modalTitle').textContent = 'Book Service';
+  el('modalSub')?.remove?.();
+}
+function closeModal(){ modalBackdrop.style.display='none'; modalBackdrop.setAttribute('aria-hidden','true'); }
+
+/* generate time slots for a date (demo: simple multiples) */
+function generateSlotsFor(dateStr){
+  // demo slots 09:00 - 17:00 every 60min
+  const slots = [];
+  for(let h=9; h<=16; h++){
+    slots.push(`${String(h).padStart(2,'0')}:00`);
+    slots.push(`${String(h).padStart(2,'0')}:30`);
+  }
+  return slots;
+}
+el('datePicker').addEventListener('change', (e)=>{
+  const date = e.target.value;
+  if(!date) return;
+  const slots = generateSlotsFor(date);
+  timeGrid.innerHTML = '';
+  chosenSlot = null;
+  slots.forEach(s=>{
+    const b = document.createElement('button'); b.className='slot'; b.textContent = s;
+    b.addEventListener('click', ()=> {
+      // deactive others
+      Array.from(timeGrid.children).forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); chosenSlot = s;
+    });
+    timeGrid.appendChild(b);
+  });
+});
+
+/* Confirm booking: saves to localStorage and opens WhatsApp compose */
+el('modalConfirm').addEventListener('click', ()=>{
+  const serviceId = svcSelect.value;
+  const svc = SERVICES.find(x=>x.id===serviceId);
+  const name = el('custName').value.trim();
+  const phone = el('custPhone').value.trim();
+  const date = el('datePicker').value;
+  if(!svc || !name || !phone || !date || !chosenSlot){
+    alert('Please complete all fields and choose a time slot.');
+    return;
+  }
+  // save demo booking
+  const booking = {
+    id: 'bk_' + Date.now(),
+    serviceId, serviceTitle: svc.title, name, phone, date, time: chosenSlot, price: svc.price, createdAt: new Date().toISOString()
+  };
+  const stored = JSON.parse(localStorage.getItem('luxe_bookings') || '[]');
+  stored.push(booking);
+  localStorage.setItem('luxe_bookings', JSON.stringify(stored));
+  closeModal();
+  toast('Booking saved — opening WhatsApp');
+
+  // open WhatsApp prefilled message (optional)
+  // NOTE: change phoneNumber to your business number in international format WITHOUT '+' or leading zeros
+  const phoneNumber = '2348149162514'; // replace with your number
+  const msg = `Hello Luxe Glow — I would like to book: ${svc.title}%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ADate: ${date}%0ATime: ${chosenSlot}%0APrice: ${formatN(svc.price)}`;
+  // open in same tab (mobile: opens WhatsApp app; desktop: WhatsApp Web)
+  window.location.href = `https://wa.me/${phoneNumber}?text=${msg}`;
+});
+
+/* Quick book sidebar */
+el('quickBookBtn').addEventListener('click', ()=>{
+  const sid = el('quickService').value;
+  const name = el('quickName').value.trim();
+  const phone = el('quickPhone').value.trim();
+  if(!sid || !name || !phone){ alert('Please enter name, phone and choose a service.'); return; }
+  // open modal with preselected service for date/time
+  openBookingModal(sid);
+  el('custName').value = name;
+  el('custPhone').value = phone;
+  // scroll modal into view
+});
+
+/* quick contact: open WhatsApp without booking */
+el('quickContact').addEventListener('click', ()=>{
+  const phoneNumber = '2348149162514';
+  window.location.href = `https://wa.me/${phoneNumber}`;
+});
+
+/* header CTA */
+el('bookNowBtn').addEventListener('click', ()=> openBookingModal());
+el('contactBtn').addEventListener('click', ()=> window.location.href = `https://wa.me/2348149162514`);
+
+/* render initial lists */
+renderServices();
+renderPackages();
+
+/* accessibility: ESC closes modal */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape' && modalBackdrop.style.display === 'flex') closeModal();
+});
+<!-- inside your <script> tag at the bottom of index.html -->
+/* header CTA */
+el('bookNowBtn').addEventListener('click', ()=> openBookingModal());
+el('contactBtn').addEventListener('click', ()=> window.location.href = `https://wa.me/2348149162514`);
+
+/* ✅ NEW: Explore / Packages buttons */
+el('exploreServices').addEventListener('click', ()=> {
+  window.location.href = "services.html";   // go to services page
+});
+el('viewPackages').addEventListener('click', ()=> {
+  window.location.href = "packages.html";   // go to packages page
+});
+
+</script>
+</body>
+</html>
