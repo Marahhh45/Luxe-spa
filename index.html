@@ -23,6 +23,17 @@ body{
   line-height:1.5;
   overflow-x:hidden;      /* 🚫 prevent sideways scroll */
 }
+.quick-book {
+   position: absolute;   /* or fixed */
+   top: 0;
+   right: 0;
+   width: 400px;
+}
+.quick-book {
+   position: relative;      /* keeps it inside the flow */
+   max-width: 100%;         /* let it shrink */
+   margin: 0 auto;          /* center on small screens */
+}
 
 /* ---------- Layout ---------- */
 .wrapper{
@@ -174,6 +185,27 @@ header{
 }
 .slot.active{background:var(--primary);color:#fff;border-color:transparent}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
+/* ---------- Aside ---------- */
+.aside{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:var(--shadow);
+  position:sticky;
+  top:20px;
+  height:fit-content;
+}
+
+/* 🔑 Add this override */
+@media(max-width:900px){
+  .aside{
+    position:static;   /* no more sticky on phones */
+    top:auto;
+    width:100%;
+    margin-top:20px;   /* add a little spacing if you like */
+  }
+}
+
 
 /* ---------- Toast ---------- */
 .toast{
@@ -187,6 +219,13 @@ header{
   transform:translateY(20px);
   transition:.25s;
 }
+@media (max-width: 768px) {
+  .quick-book {
+     width: 90%;
+     padding: 1rem;
+  }
+}
+
 .toast.show{opacity:1;transform:none}
 
 /* ---------- Footer ---------- */
