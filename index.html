@@ -413,6 +413,13 @@ el('exploreServices').addEventListener('click', ()=> {
 el('viewPackages').addEventListener('click', ()=> {
   window.location.href = "packages.html";   // go to packages page
 });
+/* ... keep all your existing JS ... */
+
+// ✅ Close modal when the Cancel button is clicked
+el('modalCancel').addEventListener('click', () => {
+  closeModal();
+});
+
 
 </script>
 </body>
