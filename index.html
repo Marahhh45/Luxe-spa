@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Luxe Glow — Beauty & Spa Booking</title>
 <style>
-/* ---------- Theme ---------- */
 :root{
   --bg:#FAF8FF;
   --card:#fff;
@@ -21,21 +20,8 @@ body{
   background:var(--bg);
   color:#111827;
   line-height:1.5;
-  overflow-x:hidden;      /* 🚫 prevent sideways scroll */
+  overflow-x:hidden;
 }
-.quick-book {
-   position: absolute;   /* or fixed */
-   top: 0;
-   right: 0;
-   width: 400px;
-}
-.quick-book {
-   position: relative;      /* keeps it inside the flow */
-   max-width: 100%;         /* let it shrink */
-   margin: 0 auto;          /* center on small screens */
-}
-
-/* ---------- Layout ---------- */
 .wrapper{
   max-width:1200px;
   margin:auto;
@@ -46,189 +32,49 @@ body{
 }
 @media(max-width:900px){
   .wrapper{grid-template-columns:1fr}
-  .aside{order:-1}        /* quick book moves below header on small screens */
+  .aside{order:-1}
 }
-header{
-  grid-column:1/-1;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  margin-bottom:20px;
-}
+header{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:20px}
 .brand{display:flex;gap:10px;align-items:center}
-.logo{
-  width:58px;height:58px;
-  border-radius:12px;
-  display:grid;place-items:center;
-  color:#fff;font-weight:800;
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  box-shadow:var(--shadow);
-}
+.logo{width:58px;height:58px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:var(--shadow)}
 .title{font-size:1.3rem;font-weight:800}
 .tagline{font-size:.9rem;color:var(--muted)}
-
-/* ---------- Buttons ---------- */
-.btn{
-  background:var(--primary);
-  color:#fff;
-  padding:10px 16px;
-  border:none;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s;
-}
+.btn{background:var(--primary);color:#fff;padding:10px 16px;border:none;border-radius:10px;font-weight:700;cursor:pointer;transition:.2s}
 .btn:hover{opacity:.9}
-.btn.secondary{
-  background:transparent;
-  color:var(--primary);
-  border:1px solid rgba(108,75,229,.2);
-}
-
-/* ---------- Hero & Main ---------- */
+.btn.secondary{background:transparent;color:var(--primary);border:1px solid rgba(108,75,229,.2)}
 .main{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
 .hero{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
 .hero-text{flex:1;min-width:260px}
 .hero h1{font-size:1.7rem;margin-bottom:8px}
 .hero p{color:var(--muted);margin-bottom:12px}
-.hero-img{
-  flex:0 0 320px;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
+.hero-img{flex:0 0 320px;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
 .hero-img img{width:100%;height:auto;display:block}
-
-/* ---------- Services ---------- */
 .section{margin-top:24px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.service{
-  background:var(--card);
-  border-radius:12px;
-  padding:12px;
-  display:flex;
-  gap:12px;
-  align-items:center;
-  box-shadow:0 4px 12px rgba(0,0,0,.04);
-}
+.service{background:var(--card);border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.04)}
 .svc-thumb{width:70px;height:70px;flex-shrink:0;border-radius:10px;overflow:hidden}
 .svc-thumb img{width:100%;height:100%;object-fit:cover}
 .svc-meta h4{margin:0;font-size:1rem}
 .svc-meta p{color:var(--muted);font-size:.88rem;margin-top:4px}
 .price{font-weight:800;margin-top:6px}
-.service button{margin-top:8px}
-
-/* ---------- Packages (scroll row) ---------- */
 .packages{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
-.pkg{
-  min-width:220px;
-  background:var(--card);
-  border-radius:12px;
-  padding:14px;
-  box-shadow:var(--shadow);
-}
+.pkg{min-width:220px;background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
 .pkg h4{margin-bottom:4px}
 .pkg p{color:var(--muted);font-size:.9rem;margin-bottom:6px}
-
-/* ---------- Aside ---------- */
-.aside{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:16px;
-  box-shadow:var(--shadow);
-  position:sticky;
-  top:20px;
-  height:fit-content;
-}
+.aside{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);position:sticky;top:20px;height:fit-content}
 .aside h3{margin-bottom:6px}
-.quick input,.quick select{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
-}
+.quick input,.quick select{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
 .muted{font-size:.9rem;color:var(--muted)}
-
-/* ---------- Modal ---------- */
-.backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
-}
-.modal{
-  background:var(--card);
-  border-radius:12px;
-  max-width:420px;
-  width:90%;
-  padding:20px;
-  box-shadow:0 12px 40px rgba(0,0,0,.25);
-}
-.modal input,.modal select{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
-}
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;justify-content:center;align-items:center;z-index:1000}
+.modal{background:var(--card);border-radius:12px;max-width:420px;width:90%;padding:20px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.modal input,.modal select{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
 .time-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.slot{
-  padding:6px 10px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  cursor:pointer;
-}
+.slot{padding:6px 10px;border:1px solid #ccc;border-radius:8px;cursor:pointer}
 .slot.active{background:var(--primary);color:#fff;border-color:transparent}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
-/* ---------- Aside ---------- */
-.aside{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:16px;
-  box-shadow:var(--shadow);
-  position:sticky;
-  top:20px;
-  height:fit-content;
-}
-
-/* 🔑 Add this override */
-@media(max-width:900px){
-  .aside{
-    position:static;   /* no more sticky on phones */
-    top:auto;
-    width:100%;
-    margin-top:20px;   /* add a little spacing if you like */
-  }
-}
-
-
-/* ---------- Toast ---------- */
-.toast{
-  position:fixed;
-  right:20px;bottom:20px;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  color:#fff;
-  padding:12px 18px;
-  border-radius:10px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:.25s;
-}
-@media (max-width: 768px) {
-  .quick-book {
-     width: 90%;
-     padding: 1rem;
-  }
-}
-
+@media(max-width:900px){.aside{position:static;top:auto;width:100%;margin-top:20px}}
+.toast{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;padding:12px 18px;border-radius:10px;opacity:0;transform:translateY(20px);transition:.25s}
 .toast.show{opacity:1;transform:none}
-
-/* ---------- Footer ---------- */
 footer{grid-column:1/-1;text-align:center;color:var(--muted);margin-top:20px}
 </style>
 </head>
@@ -249,7 +95,6 @@ footer{grid-column:1/-1;text-align:center;color:var(--muted);margin-top:20px}
     </div>
   </header>
 
-  <!-- Main column -->
   <main class="main">
     <section class="hero">
       <div class="hero-text">
@@ -270,13 +115,11 @@ footer{grid-column:1/-1;text-align:center;color:var(--muted);margin-top:20px}
           <div class="packages" id="packagesList"></div>
         </div>
       </div>
-
       <div class="hero-img">
         <img src="download (3).jpeg" alt="Spa treatment">
       </div>
     </section>
   </main>
-  
 
   <!-- Quick book -->
   <aside class="aside">
@@ -285,7 +128,8 @@ footer{grid-column:1/-1;text-align:center;color:var(--muted);margin-top:20px}
     <div class="quick">
       <select id="quickService"></select>
       <input id="quickName" placeholder="Your name">
-      <input id="quickPhone" placeholder="Phone (e.g. 2348...)">
+      <!-- ✅ Only numbers, 11 max -->
+      <input id="quickPhone" type="tel" pattern="\d{11}" maxlength="11" placeholder="Phone (11 digits)">
       <button class="btn" style="width:100%" id="quickBook">Reserve</button>
     </div>
   </aside>
@@ -299,7 +143,8 @@ footer{grid-column:1/-1;text-align:center;color:var(--muted);margin-top:20px}
     <h3>Book Service</h3>
     <select id="svcSelect"></select>
     <input id="custName" placeholder="Full name">
-    <input id="custPhone" placeholder="Phone (e.g. 2348...)">
+    <!-- ✅ Only numbers, 11 max -->
+    <input id="custPhone" type="tel" pattern="\d{11}" maxlength="11" placeholder="Phone (11 digits)">
     <input type="date" id="datePicker">
     <div class="time-grid" id="timeGrid"></div>
     <div class="modal-actions">
@@ -357,7 +202,7 @@ function openModal(id){
   el('datePicker').setAttribute('min',new Date().toISOString().split('T')[0]);
 }
 function closeModal(){modal.style.display='none';}
-el('datePicker').addEventListener('change',e=>{
+el('datePicker').addEventListener('change',()=>{
   timeGrid.innerHTML='';chosenTime=null;
   for(let h=9;h<=16;h++){
     ['00','30'].forEach(m=>{
@@ -374,7 +219,7 @@ el('confirmModal').onclick=()=>{
   const name=el('custName').value.trim();
   const phone=el('custPhone').value.trim();
   const date=el('datePicker').value;
-  if(!s||!name||!phone||!date||!chosenTime){alert('Fill all fields');return;}
+  if(!s||!name||!/^\d{11}$/.test(phone)||!date||!chosenTime){alert('Fill all fields correctly');return;}
   toast('Booking saved — opening WhatsApp');
   closeModal();
   const num='2348149162514';
@@ -385,7 +230,7 @@ el('confirmModal').onclick=()=>{
 /* Quick book */
 el('quickBook').onclick=()=>{
   const id=qSelect.value,name=el('quickName').value.trim(),phone=el('quickPhone').value.trim();
-  if(!id||!name||!phone){alert('Complete all quick fields');return;}
+  if(!id||!name||!/^\d{11}$/.test(phone)){alert('Complete all quick fields with a valid 11-digit number');return;}
   openModal(id);el('custName').value=name;el('custPhone').value=phone;
 };
 
@@ -396,17 +241,18 @@ el('cancelModal').onclick=closeModal;
 window.onclick=e=>{if(e.target===modal)closeModal();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-document.getElementById('exploreServices').addEventListener('click', () => {
-  // open the services page
-  window.location.href = 'services.html';
-});
+/* Only allow digits while typing */
+function enforcePhoneDigits(input){
+  input.addEventListener('input',()=>{
+    input.value=input.value.replace(/\D/g,'').slice(0,11);
+  });
+}
+enforcePhoneDigits(el('quickPhone'));
+enforcePhoneDigits(el('custPhone'));
 
-document.getElementById('viewPackages').addEventListener('click', () => {
-  // open the packages page
-  window.location.href = 'packages.html';
-});
-
-
+/* Dummy navigation */
+el('exploreServices').onclick=()=>alert('Navigate to services.html');
+el('viewPackages').onclick=()=>alert('Navigate to packages.html');
 </script>
 </body>
 </html>
